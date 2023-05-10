@@ -1,5 +1,5 @@
-#ifndef _H_TEMPLATEPLUGIN_
-#define _H_TEMPLATEPLUGIN_
+#ifndef _H_MOOGFILTER_
+#define _H_MOOGFILTER_
 
 // framework
 #include "DistrhoPlugin.hpp"
@@ -11,26 +11,29 @@
 #include <iostream>
 
 // constants
-#define EXAMPLE         1
+constexpr uint32_t kNumChannels = 2;
 
 START_NAMESPACE_DISTRHO
 
 /**
   Your plugin class that subclases the base DPF Plugin one.
 */
-class TemplatePlugin : public Plugin
+class MoogFilter : public Plugin
 {
 public:
     enum Parameters {
-        PARAM_GAIN,
-        PARAM_COUNT
+        kCutoffFreq,
+        kResonance,
+        kDrive,
+        kOutputGain,
+        kNumParams
     };
 
     /**
       Plugin class constructor.
       You must set all parameter values to their defaults, matching the value in initParameter().
     */
-    TemplatePlugin();
+    MoogFilter();
 
 protected:
     // -------------------------------------------------------------------
@@ -40,13 +43,13 @@ protected:
       Get the plugin label.
       This label is a short restricted name consisting of only _, a-z, A-Z and 0-9 characters.
     */
-    const char* getLabel() const noexcept override { return "templatePlugin"; }
+    const char* getLabel() const noexcept override { return "moogFilter"; }
 
     /**
       Get an extensive comment/description about the plugin.
       Optional, returns nothing by default.
     */
-    const char* getDescription() const override { return "sve-templatePlugin"; }
+    const char* getDescription() const override { return "sve-moogFilter"; }
 
     /**
       Get the plugin author/maker.
@@ -124,15 +127,18 @@ protected:
     void sampleRateChanged(double newSampleRate) override;
 
 private:
-    // objects
-
+    float fCutoffFreq;
+    float fResonance;
+    float fDrive;
+    float fOutputGain;
+    float fDelay[kNumChannels][4];
+    float fState[kNumChannels][2];
     /**
         Set our plugin class as non-copyable and add a leak detector just in case.
     */
-    DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TemplatePlugin)
-    float gain;
+    DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MoogFilter)
 };
 
 END_NAMESPACE_DISTRHO
 
-#endif // _H_TEMPLATEPLUGIN_
+#endif // _H_MOOGFILTER_

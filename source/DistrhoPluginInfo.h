@@ -18,11 +18,11 @@
 #define DISTRHO_PLUGIN_INFO_H_INCLUDED
 
 #define DISTRHO_PLUGIN_BRAND "SvE-plugins"
-#define DISTRHO_PLUGIN_NAME "sve-templatePlugin"
-#define DISTRHO_PLUGIN_URI  "https://github.com/StevenRVE/sve-template-plugin.git"
+#define DISTRHO_PLUGIN_NAME "sve-moogFilter"
+#define DISTRHO_PLUGIN_URI  "https://github.com/StevenRVE/moogFilter.git"
 
 #define DISTRHO_PLUGIN_IS_RT_SAFE       1
 #define DISTRHO_PLUGIN_NUM_INPUTS       1
-#define DISTRHO_PLUGIN_NUM_OUTPUTS      1
+#define DISTRHO_PLUGIN_NUM_OUTPUTS      2
 
 #endif // DISTRHO_PLUGIN_INFO_H_INCLUDED
